@@ -13,7 +13,7 @@ public class DataProducer {
     private Producer<String, String> producer;
     private String traceFileName;
 
-    private Integer NumPartitions = 5;
+    private Integer numPartitions = 5;
 
     public DataProducer(Producer producer, String traceFileName) {
         this.producer = producer;
@@ -35,17 +35,17 @@ public class DataProducer {
             JsonParser parser = new JsonParser();
             String line = null;
             while ((line = br.readLine()) != null) {
-                JsonObject JSON = parser.parse(line).getAsJsonObject();
+                JsonObject jsonObj = parser.parse(line).getAsJsonObject();
                 // Producer Record: topic, partition number, (opt) key, value
-                String Type = JSON.get("type").getAsString();
-                String Topic = (Type.equals("DRIVER_LOCATION"))
+                String type = jsonObj.get("type").getAsString();
+                String topic = (type.equals("DRIVER_LOCATION"))
                         ? "driver-locations"
                         : "events";
 
-                Integer BlockID = JSON.get("blockId").getAsInt();
+                Integer blockId = jsonObj.get("blockId").getAsInt();
                 producer.send(new ProducerRecord<String, String>(
-                        Topic, /* topic */
-                        BlockID % NumPartitions, /* partition id */
+                        topic, /* topic */
+                        blockId % numPartitions, /* partition id */
                         null, /* key */
                         line /* value */
                 ));

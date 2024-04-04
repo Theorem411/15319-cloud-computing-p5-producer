@@ -3,7 +3,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 public class DataProducerRunner {
-    private static String KAFKA_MASTER_NODE_IP = "172.31.22.214:9092";
+    private static String kafka_master_node_ip = "172.31.22.214:9092";
 
     public static void main(String[] args) throws Exception {
         /*
@@ -17,7 +17,7 @@ public class DataProducerRunner {
          */
         // set up Kafka Producer
         Properties props = new Properties();
-        props.put("bootstrap.servers", KAFKA_MASTER_NODE_IP);
+        props.put("bootstrap.servers", kafka_master_node_ip);
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
