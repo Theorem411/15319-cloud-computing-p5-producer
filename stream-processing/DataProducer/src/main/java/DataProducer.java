@@ -39,15 +39,15 @@ public class DataProducer {
                 // Producer Record: topic, partition number, (opt) key, value
                 String Type = JSON.get("type").getAsString();
                 String Topic = (Type.equals("DRIVER_LOCATION"))
-                    ? "driver-locations"
-                    : "events";
-                
+                        ? "driver-locations"
+                        : "events";
+
                 Integer BlockID = JSON.get("blockId").getAsInt();
                 producer.send(new ProducerRecord<String, String>(
-                    Topic, /* topic */
-                    BlockID % NumPartitions, /* partition id */
-                    null, /* key */
-                    line /* value */
+                        Topic, /* topic */
+                        BlockID % NumPartitions, /* partition id */
+                        null, /* key */
+                        line /* value */
                 ));
             }
         } catch (IOException e) {
