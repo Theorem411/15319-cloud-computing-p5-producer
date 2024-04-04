@@ -35,7 +35,7 @@ public class DataProducerTest {
                 new ProducerRecord<>("driver-locations", 4, null, "{\"blockId\":5649,\"type\":\"DRIVER_LOCATION\"}"),
                 new ProducerRecord<>("events", 0, null, "{\"blockId\":5650,\"type\":\"RIDE_REQUEST\"}"),
                 new ProducerRecord<>("driver-locations", 1, null, "{\"blockId\":5651,\"type\":\"DRIVER_LOCATION\"}"),
-                new ProducerRecord<>("events", 2, null, "\"blockId\":5652,\"type\":\"LEAVING_BLOCK\"}")
+                new ProducerRecord<>("events", 2, null, "{\"blockId\":5652,\"type\":\"LEAVING_BLOCK\"}")
         );
 
         Assert.assertEquals("Producer records not matched!", expected, history);
