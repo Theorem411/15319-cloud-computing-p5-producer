@@ -1,2 +1,5 @@
 {"blockId":5648,"type":"ENTERING_BLOCK"}
 {"blockId":5649,"type":"DRIVER_LOCATION"}
+{"blockId":5650,"type":"RIDE_REQUEST"}
+{"blockId":5651,"type":"DRIVER_LOCATION"}
+{"blockId":5652,"type":"LEAVING_BLOCK"}
