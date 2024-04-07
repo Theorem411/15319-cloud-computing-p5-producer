@@ -24,4 +24,5 @@ hs_err_pid*
 replay_pid*
 
 # trace file 
-driver-match/trace_task2
+stream-processing/DataProducer/trace_task2
+stream-processing/DataProducer/tracefile
