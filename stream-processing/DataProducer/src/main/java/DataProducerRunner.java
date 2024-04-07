@@ -3,7 +3,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 public class DataProducerRunner {
-    private static String kafkaMasterNodeIp = "172.31.22.214:9092";
+    private static String kafkaMasterNodeIp = "172.31.29.230:9092";
 
     public static void main(String[] args) throws Exception {
         /*
@@ -29,7 +29,7 @@ public class DataProducerRunner {
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         // call DataProducer to send data stream to Kafka
-        DataProducer dataProducer = new DataProducer(producer, "tracefile");
+        DataProducer dataProducer = new DataProducer(producer, "trace_task2");
         dataProducer.sendData();
 
         /// DEBUG: close producer
