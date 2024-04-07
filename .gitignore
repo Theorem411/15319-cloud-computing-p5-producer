@@ -26,3 +26,11 @@ replay_pid*
 # trace file 
 stream-processing/DataProducer/trace_task2
 stream-processing/DataProducer/tracefile
+
+.bash_logout
+.bashrc
+.cache/motd.legal-displayed
+.gitconfig
+.profile
+.ssh/authorized_keys
+.trace
