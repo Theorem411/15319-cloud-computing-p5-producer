@@ -29,7 +29,7 @@ public class DataProducerRunner {
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         // call DataProducer to send data stream to Kafka
-        DataProducer dataProducer = new DataProducer(producer, "trace_task2");
+        DataProducer dataProducer = new DataProducer(producer, "trace_task3");
         dataProducer.sendData();
 
         /// DEBUG: close producer

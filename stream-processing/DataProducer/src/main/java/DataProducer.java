@@ -36,18 +36,41 @@ public class DataProducer {
             while ((line = br.readLine()) != null) {
                 JsonObject jsonObj = parser.parse(line).getAsJsonObject();
                 // Producer Record: topic, partition number, (opt) key, value
-                String type = jsonObj.get("type").getAsString();
-                String topic = (type.equals("DRIVER_LOCATION"))
-                        ? "driver-locations"
-                        : "events";
+                /** Task 2 ONLY */
+                // String type = jsonObj.get("type").getAsString();
+                // String topic = (type.equals("DRIVER_LOCATION"))
+                //         ? "driver-locations"
+                //         : "events";
 
+                // Integer blockId = jsonObj.get("blockId").getAsInt();
+                // producer.send(new ProducerRecord<String, String>(
+                //         topic, /* topic */
+                //         blockId % numPartitions, /* partition id */
+                //         null, /* key */
+                //         line /* value */
+                // ));
+                
+                /** Task 3 ONLY */
+                String type = jsonObj.get("type").getAsString();
                 Integer blockId = jsonObj.get("blockId").getAsInt();
-                producer.send(new ProducerRecord<String, String>(
-                        topic, /* topic */
-                        blockId % numPartitions, /* partition id */
-                        null, /* key */
-                        line /* value */
-                ));
+                if (type.equals("RIDER_INTEREST") || type.equals("RIDER_STATUS")) {
+                    // if input's type is RIDER_INTEREST or RIDER_STATUS, send to all partitions
+                    for (int pid = 0; pid < numPartitions; pid++) {
+                        producer.send(new ProducerRecord<String, String>(
+                                "events", /* topic */
+                                pid, /* partition id */
+                                null, /* key */
+                                line /* value */
+                        ));
+                    }
+                } else if (type.equals("RIDE_REQUEST")) {
+                    producer.send(new ProducerRecord<String, String>(
+                            "events", /* topic */
+                            blockId % numPartitions, /* partition id */
+                            null, /* key */
+                            line /* value */
+                    ));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
