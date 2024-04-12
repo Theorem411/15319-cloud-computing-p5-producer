@@ -52,7 +52,6 @@ public class DataProducer {
                 
                 /** Task 3 ONLY */
                 String type = jsonObj.get("type").getAsString();
-                Integer blockId = jsonObj.get("blockId").getAsInt();
                 if (type.equals("RIDER_INTEREST") || type.equals("RIDER_STATUS")) {
                     // if input's type is RIDER_INTEREST or RIDER_STATUS, send to all partitions
                     for (int pid = 0; pid < numPartitions; pid++) {
@@ -64,6 +63,7 @@ public class DataProducer {
                         ));
                     }
                 } else if (type.equals("RIDE_REQUEST")) {
+                    Integer blockId = jsonObj.get("blockId").getAsInt();
                     producer.send(new ProducerRecord<String, String>(
                             "events", /* topic */
                             blockId % numPartitions, /* partition id */
