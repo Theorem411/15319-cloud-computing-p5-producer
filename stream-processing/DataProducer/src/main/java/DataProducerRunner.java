@@ -3,7 +3,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 public class DataProducerRunner {
-    private static String kafkaMasterNodeIp = "172.31.19.122:9092";
+    private static String kafkaMasterNodeIp = "172.31.30.72:9092";
 
     public static void main(String[] args) throws Exception {
         /*
