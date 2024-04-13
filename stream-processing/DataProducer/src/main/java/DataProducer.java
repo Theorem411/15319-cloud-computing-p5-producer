@@ -51,26 +51,36 @@ public class DataProducer {
                 // ));
                 
                 /** Task 3 ONLY */
-                String type = jsonObj.get("type").getAsString();
-                if (type.equals("RIDER_INTEREST") || type.equals("RIDER_STATUS")) {
-                    // if input's type is RIDER_INTEREST or RIDER_STATUS, send to all partitions
-                    for (int pid = 0; pid < numPartitions; pid++) {
-                        producer.send(new ProducerRecord<String, String>(
-                                "events", /* topic */
-                                pid, /* partition id */
-                                null, /* key */
-                                line /* value */
-                        ));
-                    }
-                } else if (type.equals("RIDE_REQUEST")) {
-                    Integer blockId = jsonObj.get("blockId").getAsInt();
-                    producer.send(new ProducerRecord<String, String>(
-                            "events", /* topic */
-                            blockId % numPartitions, /* partition id */
-                            null, /* key */
-                            line /* value */
-                    ));
-                }
+                // String type = jsonObj.get("type").getAsString();
+                // if (type.equals("RIDER_INTEREST") || type.equals("RIDER_STATUS")) {
+                //     // if input's type is RIDER_INTEREST or RIDER_STATUS, send to all partitions
+                //     for (int pid = 0; pid < numPartitions; pid++) {
+                //         producer.send(new ProducerRecord<String, String>(
+                //                 "events", /* topic */
+                //                 pid, /* partition id */
+                //                 null, /* key */
+                //                 line /* value */
+                //         ));
+                //     }
+                // } else if (type.equals("RIDE_REQUEST")) {
+                //     Integer blockId = jsonObj.get("blockId").getAsInt();
+                //     producer.send(new ProducerRecord<String, String>(
+                //             "events", /* topic */
+                //             blockId % numPartitions, /* partition id */
+                //             null, /* key */
+                //             line /* value */
+                //     ));
+                // }
+
+                /* Task Bonus ONLY */
+                Integer userId = jsonObj.get("userId").getAsInt();
+                producer.send(new ProducerRecord<String, String>(
+                    "ad-click", /* topic */
+                    userId % numPartitions, /* partition id */
+                    null, /* key */
+                    line /* value */
+                ));
+
             }
         } catch (IOException e) {
             e.printStackTrace();
